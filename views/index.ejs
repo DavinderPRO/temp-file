@@ -1,67 +1,128 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title> Temporary file upload
-</title>
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400italic" rel="stylesheet" type="text/css">
-    <link href="./css/style.css" rel="stylesheet" />
-  </head>
-  <body>
 
-<br>
-<br>
-<div>
-<div>
-<h1>
-  Temporary file upload
-</h1>
-  
-</div>
+<head>
+  <meta charset="utf-8">
+  <title> Temporary file upload
+  </title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
- <div>
-  
-  <form action="/upload" method="post" enctype="multipart/form-data">
-  <div>
-    
-<label for="myfile">Select a file:</label>
-  <input type="file" id="myfile" name="myfile" multiple>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</head>
+
+<body>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Confirmation</h4>
+      <p>Delete all the uploaded files?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" onclick="javascript:deletefiles()" class="modal-close waves-effect waves-green btn">Yes</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+    </div>
   </div>
-  
-<div>
-<br>
-  <input type="submit" value=" Upload ">
-  
-</div>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <a href="#" class="brand-logo">Temp-File</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/viewuploads">View files</a></li>
+        <li><a data-target="modal1" class="modal-trigger" href="#!">Delete files</a></li>
+      </ul>
+    </div>
+  </nav>
+  <ul id="slide-out" class="sidenav">
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a href="/"><i class="material-icons">home</i>Home</a></li>
+    <li><a href="/viewuploads"><i class="material-icons">format_list_bulleted</i>View files</a></li>
+    <li><a href="#!" data-target="modal1" class="modal-trigger"><i class="material-icons">delete</i>Delete files</a>
+    </li>
+  </ul>
 
-</form>
-   
- </div>
- <br>
-<br>
-
-
-
-</div>
-
-<div>
-<p>
- View previouly uploaded files <a href="/viewuploads">uploads</a> 
-
-</p>
-
-<br>
-<br>
-  
-</div>
-
-<div>
-<p>
- Delete all uploaded files <a style="color:red" href="/deletefiles">DELETE</a> 
-</p>  
-</div>
+  <div class="container">
 
 
-  </body>
+    <div class="row">
+
+      <div class="col s12">
+        <h5>
+          File upload
+        </h5>
+      </div>
+
+      <form class="col s12" action="/upload" method="post" enctype="multipart/form-data">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" name="myfile" multiple>
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+          </div>
+        </div>
+        <div class="center-align">
+
+          <input type="submit" class="btn " value=" Upload ">
+        </div>
+
+      </form>
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var allModals = document.querySelectorAll('.modal');
+      var modalInstances = M.Modal.init(allModals);
+
+      var sidenav = document.querySelectorAll('.sidenav');
+      var sidenavIinstances = M.Sidenav.init(sidenav);
+
+
+    });
+    function deletefiles() {
+
+
+      fetch("/deletefiles", {
+        method: "DELETE",
+        headers: [
+          ["Content-Type", "application/json"],
+        ]
+      })
+        .then(
+          function (response) {
+            if (response.status !== 200)
+              return M.toast({ html: 'Some error occurred' })
+
+            response.json().then(function (data) {
+              if (data.status !== 'ok')
+                return M.toast({ html: 'Some error occurred' })
+              M.toast({ html: 'All files deleted!' })
+            });
+          }
+        )
+        .catch(function (err) {
+          console.log('Fetch Error :-S', err);
+          return M.toast({ html: 'Some error occurred' })
+        });
+    }
+
+  </script>
+
+</body>
+
 </html>

@@ -47,16 +47,21 @@ app.post('/upload', upload.array('myfile', 10), (req, res) => {
 });
 
 
-app.get('/deletefiles', function name(req, res) {
+app.delete('/deletefiles', function name(req, res) {
   fs.readdir(directory, (err, files) => {
-    if (err) throw err;
-    for (const file of files) {
-      fs.unlink(path.join(directory, file), err => {
-        if (err) throw err;
-      });
+    if (err) {
+      console.error(err);
+      return res.json({ status: 'error' });
+    } else {
+      for (const file of files) {
+        fs.unlink(path.join(directory, file), err => {
+          if (err) {
+            console.error(err);
+          }
+        });
+      }
+      return res.json({ status: 'ok' });
     }
-    res.redirect('/')
-    // return res.send('done deleting files');
   });
 })
 
