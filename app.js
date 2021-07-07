@@ -14,7 +14,7 @@ const PORT = process.env.PORT || '5000';
 var router = express.Router();
 
 router.get('/', function (request, response) {
-  response.render('index', { title: 'Welcome!' });
+  response.render('index', { env: process.env });
 });
 
 router.get('/student', function (request, response) {
