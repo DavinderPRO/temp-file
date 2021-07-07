@@ -3,7 +3,12 @@ const serveIndex = require('serve-index')
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const directory = './public/uploads'
+const directory = './uploads'
+fs.readdir(directory, (err) => {
+  if (err)
+    fs.mkdir(path.join(__dirname, directory), (err) => { if (err) throw err; });
+});
+
 // multer
 const multer = require('multer');
 const storage = multer.diskStorage({
