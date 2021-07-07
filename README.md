@@ -1,12 +1,11 @@
-# Express.js and EJS
 
-Example of using Node.js, Express.js and EJS.
+Simple express server to upload files to directory multer. 
 
 ### Endpoints
 
 + `/`
-+ `/student`
-+ `/teacher`
++ `/viewuploads`
++ `/deletefiles`
 
 ## Install
 
@@ -15,9 +14,4 @@ Example of using Node.js, Express.js and EJS.
 ## Run
 
 1. `npm start`
-2. Open `http://localhost:8080` in a web browser.
-
-## References
-
-+ http://expressjs.com
-+ http://ejs.co
+2. Open `http://localhost:5000` in a web browser.
