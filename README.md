@@ -5,8 +5,8 @@ Website: https://temp-file.herokuapp.com/
 ### Endpoints
 
 + `/`
-+ `/viewuploads`
-+ `/deletefiles`
++ `/uploads`
++ `/delete`
 
 ## Install
 

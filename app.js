@@ -33,13 +33,13 @@ app.get('/', function (request, response) {
 });
 
 // view uploads
-app.use('/viewuploads', express.static(directory), serveIndex(directory, { 'icons': true }))
+app.use('/uploads', express.static(directory), serveIndex(directory, { 'icons': true }))
 
 //upload
 app.post('/upload', upload.array('myfile', 10), (req, res) => {
   try {
     //res.send(req.files);
-    res.redirect('/viewuploads')
+    res.redirect('/uploads')
   } catch (error) {
     console.log(error);
     res.send(400);
@@ -47,7 +47,7 @@ app.post('/upload', upload.array('myfile', 10), (req, res) => {
 });
 
 
-app.delete('/deletefiles', function name(req, res) {
+app.delete('/delete', function name(req, res) {
   fs.readdir(directory, (err, files) => {
     if (err) {
       console.error(err);
@@ -55,9 +55,7 @@ app.delete('/deletefiles', function name(req, res) {
     } else {
       for (const file of files) {
         fs.unlink(path.join(directory, file), err => {
-          if (err) {
-            console.error(err);
-          }
+          if (err) console.error(err);
         });
       }
       return res.json({ status: 'ok' });
