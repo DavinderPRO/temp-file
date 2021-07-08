@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // root
 app.get('/', function (request, response) {
-  response.render('index', { env: process.env });
+  response.render('index');
 });
 
 // view uploads
@@ -52,14 +52,13 @@ app.delete('/delete', function name(req, res) {
     if (err) {
       console.error(err);
       return res.json({ status: 'error' });
-    } else {
-      for (const file of files) {
-        fs.unlink(path.join(directory, file), err => {
-          if (err) console.error(err);
-        });
-      }
-      return res.json({ status: 'ok' });
     }
+    for (const file of files) {
+      fs.unlink(path.join(directory, file), err => {
+        if (err) console.error(err);
+      });
+    }
+    return res.json({ status: 'ok' });
   });
 })
 
