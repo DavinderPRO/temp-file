@@ -36,8 +36,10 @@
       <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <a href="#" class="brand-logo">Temp-File</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if (authenticated) { %>
         <li><a href="/uploads">View files</a></li>
         <li><a data-target="modal1" class="modal-trigger" href="#!">Delete files</a></li>
+      <%  } %>
       </ul>
     </div>
   </nav>
@@ -46,9 +48,10 @@
       <div class="divider"></div>
     </li>
     <li><a href="/"><i class="material-icons">home</i>Home</a></li>
+     <% if (authenticated) { %>
     <li><a href="/uploads"><i class="material-icons">format_list_bulleted</i>View files</a></li>
-    <li><a href="#!" data-target="modal1" class="modal-trigger"><i class="material-icons">delete</i>Delete files</a>
-    </li>
+    <li><a href="#!" data-target="modal1" class="modal-trigger"><i class="material-icons">delete</i>Delete files</a>    </li>
+     <% } %>
   </ul>
 
   <div class="container">
