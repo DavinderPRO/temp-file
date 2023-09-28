@@ -88,7 +88,7 @@
 
 <% if (!authenticated) { %>
 
-<div class="row" id="sec" style="display:none">
+<div class="row" id="sec" >
   <h3>Login</h3>
   <form class="col s12" action="/authenticate" method="post">
     <div class="row">
@@ -123,8 +123,17 @@
 
 
 </body>
+<script>
+
+      document.getElementById("sec").style.display = "block";
+
+  
+</script>
  <script>
     document.addEventListener('DOMContentLoaded', function () {
+
+      document.getElementById("sec").style.display = "none";
+
       var allModals = document.querySelectorAll('.modal');
       var modalInstances = M.Modal.init(allModals);
 
