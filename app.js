@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // root
 app.get("/", function (req, res) {
-  res.send("nothing");
+  res.send("");
 });
 
 app.get("/yolo", function (request, response) {
