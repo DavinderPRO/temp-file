@@ -37,7 +37,11 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
 // root
-app.get("/", function (request, response) {
+app.get("/", function (req, res) {
+  res.send("nothing");
+});
+
+app.get("/yolo", function (request, response) {
   response.render("index", { authenticated: false });
 });
 
