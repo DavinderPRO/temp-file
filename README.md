@@ -1,6 +1,6 @@
 Simple express server to upload temporary files. 
 
-Website: https://temp-file.herokuapp.com/
+Website: https://temp-file.onrender.com/
 
 ### Endpoints
 
