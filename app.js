@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // root
 app.get("/", function (request, response) {
-  response.render("index", { authenticated: false });
+  response.render("index", { authenticated: true });
 });
 
 app.post("/authenticate", function (request, response) {
